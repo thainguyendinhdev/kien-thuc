@@ -1,0 +1,8 @@
+1) khi làm việc với my sql: khi muốn tạo khoá ngoại thì bảng mẹ phải được tạo khoá
+chính trước, nếu làm ví dụ mà kết nối tới bảng mẹ không phải khoá chính thì sẽ không kết nối được
+2) khi làm việc với migration trong laravel: + xác định đúng kiểu dữ liệu 2 khoá
+					+ khoá ngoại phải đặt trong ->unsigned();
+lệnh tạo:
+ php artisan make:migration create_tênbang_table
+lệnh sửa/thêm cột
+php artisan make:migration edi_tênbangcansua_table --table=tên bảng cần sửa
