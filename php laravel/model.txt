@@ -1,0 +1,75 @@
+lệnh tạo model
+	php artisan make:model 	Tênmodel
+Trong Laravel, khi sử dụng Eloquent để tương tác với cơ sở dữ liệu, có hai loại phương thức trả về kết quả là "collection" và "object".
+
+"Collection" là một tập hợp các bản ghi trong cơ sở dữ liệu. Ví dụ, khi bạn sử dụng phương thức get() để lấy tất cả các bản ghi trong một bảng, Eloquent sẽ trả về một collection.
+Muốn lấy ra phải dùng vòng lặp for để đọc
+
+"Object" là một bản ghi duy nhất trong cơ sở dữ liệu. Ví dụ, khi bạn sử dụng phương thức find($id) để lấy một bản ghi với id tương ứng, Eloquent sẽ trả về một object.
+Ko cần dùng vòng lặp để lấy
+
+
+Trong Laravel, để thêm mới hoặc cập nhật một bản ghi vào cơ sở dữ liệu, bạn có thể sử dụng Eloquent model và các phương thức của nó. 
+Các phương thức phổ biến cho việc thêm mới và cập nhật là create(), save(), update() và fill()
+	+Thêm mới 
+		
+		$post = new Post;
+		$post->title = 'New Post Title';
+		$post->body = 'New post body content';
+		$post->save();
+	hoặc
+		$post = Post::create([
+    			'title' => 'New Post Title',
+    			'body' => 'New post body content'
+			]);
+
+	+ Cập nhật:
+
+		$post = Post::find(1);
+		$post->fill([
+    			'title' => 'Updated Post Title',
+    			'body' => 'Updated post body content'
+			]);
+		$post->save();
+	hoặc
+		$post = Post::find(1);
+		$post->update([    'title' => 'Updated Post Title',    'body' => 'Updated post body content']);
+	+ Xoá bản ghi
+		Xoá 1 bản ghi
+				$post = Post::find(1);
+				$post->delete();
+		hoặc
+				Post::destroy(1); // xóa bản ghi có id = 1
+				Post::destroy([1, 2, 3]); // xóa nhiều bản ghi cùng lúc
+		Xoá nhiều bản ghi
+				$posts = Post::whereIn('id', [1, 2, 3])->get();
+				$posts->delete();
+
+
+Query Scopes (Chỉ cần hiểu local scope)	
+	+ ở model ta có thể viết 1 hàm 
+						public function scopePublished($query)
+						{
+						    return $query->where('status', 'published');
+						}
+
+	+ Khi dùng ở controller ta chỉ cần gọi:
+						$posts = Post::published()->get();
+	+ Ta cũng có thể chuyển tham số vào
+						public function scopePublishedBefore($query, $date)
+						{
+						    return $query->where('status', 'published')
+             							  ->where('published_at', '<', $date);
+						}
+	++ Khi dùng ở controller ta chuyền vào:
+						$posts = Post::publishedBefore('2022-03-01')->get(); 
+	Lưu ý khi cần viết hoa sau scope ở model còn ở controller gọi đến chỉ cần viết thường
+
+
+
+
+
+
+
+
+

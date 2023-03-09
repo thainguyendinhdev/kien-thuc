@@ -1,0 +1,9 @@
+Gõ relation là tự sẽ gợi ý ra
++  liên kết 1-1 thì đặt ở bảng nào cũng đc
+	+Chinh->phu hasone
+	+Phụ-> chính belongsto
+	+dùng hasone (model lối đến, khoá ngoại nằm ở bảng chưa khoá ngoại, khoá chính bảng hiện tại)
++  Liên kết 1-n thì đặt ở bảng 1 (ví dụ 1 tác giả có nhiều bài viết thì ta viết ở bảng tác giả)
+	+dùng hasMany(model bảng bài viết, khoá ngoại tác giả ở bảng bài viết, khoá chính bảng tác giả)
++  Liên kết n-n đặt ở bảng nào cũng đc
+	+dùng belongsToMany ('model bảng tới','tên bảng chung gian', 'khoá ngoại bảng trung gian chưa id bảng đang viết', 'khoá ngoại mảng trung gian chưa id bảng kết nối tới')

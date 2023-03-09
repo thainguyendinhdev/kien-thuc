@@ -1,0 +1,73 @@
+- Validate using Form Request				
+Trong Laravel, để xác thực các dữ liệu đầu vào được gửi đến từ form, bạn có thể sử dụng Form Request. Form Request là một lớp kế thừa từ 
+Illuminate\Foundation\Http\FormRequest, cho phép bạn kiểm tra dữ liệu đầu vào trước khi nó được gửi đến controller.
+Để tạo một Form Request mới, bạn có thể sử dụng lệnh Artisan make:request:
+	php artisan make:request CreatePostRequest
+Sau đó, bạn sẽ thấy file CreatePostRequest.php được tạo ra trong thư mục app/Http/Requests. 
+Trong file này, bạn có thể định nghĩa các luật kiểm tra cho các trường trong form bằng phương thức rules().
+Ví dụ, để kiểm tra xem trường title có được nhập hay không, bạn có thể định nghĩa như sau:
+											public function rules()
+											{
+											    return [
+        												'title' => 'required',
+   												 ];
+											}
+Ví dụ, trong controller của bạn, bạn có thể sử dụng Form Request như sau:
+									public function store(CreatePostRequest $request)
+									{
+  									  // Các dữ liệu đầu vào hợp lệ
+									}
+Ở đây, CreatePostRequest là tên của Form Request bạn đã tạo ra, và $request là instance của Form Request này được truyền vào phương thức store(). 
+Nếu dữ liệu đầu vào không hợp lệ, Laravel sẽ tự động chuyển hướng về trang trước đó và hiển thị các thông báo lỗi tương ứng.
+
+
+- Validate using Form Request	
+Bạn có thể sử dụng phương thức messages() để định nghĩa các thông báo lỗi tùy chỉnh cho từng luật kiểm tra. 
+Ví dụ, để định nghĩa một thông báo lỗi tùy chỉnh cho luật kiểm tra required, bạn có thể thêm mã sau vào Form Request:
+	public function messages()
+	{
+   	 return [
+    	    'title.required' => 'Tiêu đề không được để trống',
+   	 ];
+	}
+Cái này được đặt trong thư mục mình tạo ở trên qua câu lệnh: php artisan make:request CreatePostRequest
+Trong trường hợp không sử dụng Form Request, bạn có thể sử dụng phương thức withErrors() của đối tượng Validator để đưa thông báo lỗi vào session. Ví dụ:
+	public function store(Request $request)
+	{
+	    $validator = Validator::make($request->all(), [
+	        'title' => 'required',
+        	'content' => 'required',
+	    ]);
+	
+	    if ($validator->fails()) {
+	        return redirect()
+ 	           ->back()
+	            ->withErrors($validator)
+	            ->withInput();
+	    }
+
+	    // Các dữ liệu đầu vào hợp lệ
+	}
+Viết ở model ta dùng.
+Để hiển thị ra HTML ta cần dùng (Viết ở HTML):
+				@if ($errors->has('title'))
+  				  <div class="alert alert-danger">{{ $errors->first('title') }}</div>
+				@endif
+
+
+
+
+
+B1: tạo 1 message 
+
+
+
+
+
+
+
+
+
+
+
+			

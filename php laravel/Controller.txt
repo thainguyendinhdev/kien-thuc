@@ -1,0 +1,19 @@
+Cách tạo 1 controller:
+	php artisan make:controller TenmodelController
+Controller resource:
+	php artisan make:controller TenmodelController --resource
+Dùng lệnh php artisan route:list    //để xem danh sách các route
+lệnh đó sẽ tạo ra mặc định 7 phương thức trong controller + index (hiển thị list)
+							  + create (hiển thị form để tạo, thêm mới sản phẩm) 
+					 		  + store (lưu danh sách sau khi tạo)
+					 		  + show (hiển thị chi tiết 1 sản phẩm)
+					 		  + edhit (hiển thị form sửa 1 sản phẩm)
+					 		  + update (cập nhật form sủa 1 sản phẩm)
+					 		  + destroy (xoá 1 sản phẩm)
+còn trong web.php chỉ cần khai báo:
+				route::resource('/linkurl','TenController') //sẽ sử dụng 7 phương thức tuỳ thuộc vào method với url đó
++ để không sử dụng phương thức nào thì ta thêm
+			 route::resource('/linkurl','TenController')->except(['create','edit']); //lấy tất cả trừ create và edit 
+			 route::resource('/linkurl','TenController')->only(['create','edit']); // dùng mỗi create và edit
+Route api là route ó thêm tiền tố api ở trước 
+	ví dụ bình thường là admin/index khi viết trong api.php sẽ là api/admin/index

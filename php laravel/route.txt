@@ -1,0 +1,23 @@
+cấu trúc cơ bản của 1 route group
+route::group(['prefix'=>'admin', 'as'=>'admin', 'namespace'=>'Admin'], function(){
+    route::get('/create-product', function()
+    {
+        echo "group tạo";
+    })->name('list');
+    route::get('/namespace-test', UserController@index); //để chỏ đến UserController thực hiện phương thức index.
+});
++ prefix: là tiền tố trong url: ở ví dụ này url sẽ là
+	/admin/create-product
++ as: là để đặt tên cho các route nhóm đó
+	+ ví dụ ở đây để gọi tên route bên trong thì tên sẽ là: admin.list
++ namespace: 
+	+Ví dụ trong thư mục controller ta tạo thêm thư mục Admin có các controller UserController.php
+	dẫn link sẽ là App\HTTP\Controller\Admin\UserController
+	+ Thay vì ta  phải viết route::get('/namespace-test', Admin\UserController@index); thì ta đặt thêm namespace=>'Admin' là thay rồi.
+
+
+- Route parametes là route truyền tham số vào ví dụ:
+	Route::get('/new/{id}/category/{categoryid}), function($id, $categoryid)
+	{
+		return $id và $categoryid;
+	});

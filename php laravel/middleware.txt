@@ -1,0 +1,32 @@
+Lệnh tạo middleware:
+	php artisan make:middleware tênmiddleware
+Khai báo trong Kennel.php
++ protected $middleware = [
+
+	... // có sẵn trong thư viện
+	\App\Http\Middleware\tênmiddleware::class
+
+];
+Đây là dang global là tất cả các request không phân biệt các route là gì nó đều chạy.
+
+
++ protected $middlewareGroups= [
+	'web'=> [
+	\App\Http\Middleware\tênmiddleware::class
+
+	],
+	'api'=> [
+	\App\Http\Middleware\tênmiddleware::class
+	],
+
+];
+chỉ chạy trong web.php hay api.php nếu bạn khai báo ở đâu
+
+
+
++ protected $routeMiddleware = [
+	'tên sẽ gọi trong route' => \App\Http\Middleware\tênmiddleware::class,
+
+]
+route::get('/middleware', [AuthorController::class, 'index'])->middleware('tên sẽ gọi trong route');
+cái này thì sẽ thực thi mỗi route nào đc gọi tên
