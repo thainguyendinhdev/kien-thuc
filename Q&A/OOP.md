@@ -13,3 +13,17 @@ Bài toán xây dựng thời khóa biểu cho giáo viên có các yếu tố c
 - Tiết học (tiết 1, tiết 2, ...).
 - Thông tin tiết học (môn học, giáo viên).
 
+---
+
+### Sự khác nhau giữa Class và Object
+
+| **Thuộc tính** | **Class** | **Object** |
+|--------------|---------|---------|
+| **Định nghĩa** | Là một **khuôn mẫu** (blueprint) để tạo ra các object. | Là một **thực thể (instance)** được tạo ra từ class. |
+| **Chức năng** | Xác định thuộc tính (properties) và phương thức (methods). | Chứa dữ liệu thực tế và có thể thực thi các phương thức. |
+| **Bộ nhớ** | Không chiếm bộ nhớ cho dữ liệu cụ thể. | Chiếm bộ nhớ khi được tạo ra. |
+| **Số lượng** | Một class có thể có nhiều object. | Một object chỉ thuộc về một class. |
+
+- Class là bản thiết kế chung, không lưu dữ liệu cụ thể.
+- Object là phiên bản cụ thể của class, có dữ liệu riêng.
+- Một class có thể tạo ra nhiều object khác nhau.
