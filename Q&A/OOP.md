@@ -217,3 +217,5 @@ Cách khắc phục: Ép kiểu về Concho
 ```java
 ((Concho) a).suaTo(); // ✅ Ép kiểu thành Concho, bây giờ gọi được suaTo()
 ```
+
+### Class ko kế thừa interface mà chỉ implement interface
