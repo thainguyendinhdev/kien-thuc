@@ -27,3 +27,12 @@ Bài toán xây dựng thời khóa biểu cho giáo viên có các yếu tố c
 - Class là bản thiết kế chung, không lưu dữ liệu cụ thể.
 - Object là phiên bản cụ thể của class, có dữ liệu riêng.
 - Một class có thể tạo ra nhiều object khác nhau.
+- Class và Object có phương thức và thuộc tính
+
+So sánh Thuộc tính và Phương thức của Class vs Object
+
+| **Đặc điểmh** | **Class** | **Object** |
+|--------------|---------|---------|
+| **Thuộc tính** | Được khai báo bên trong class nhưng chưa có giá trị cụ thể. | Mỗi object có giá trị riêng cho thuộc tính.|
+| **Phương thức** | Được khai báo trong class, có thể dùng chung cho nhiều object. | Dùng phương thức của class để thao tác với dữ liệu của object. |
+| **Truy cập** | 	Dùng self::$property (trong class) hoặc Class::$property nếu là static. | Dùng $object->property để truy cập. |
