@@ -42,3 +42,33 @@
 **Tóm lại:**
 - CHAR phù hợp với dữ liệu ngắn & cố định.
 - VARCHAR linh hoạt hơn khi dữ liệu có độ dài thay đổi.
+
+
+### 4 Mức cô lập trong transaction.
+1. Read Uncommited (RU).
+
+- Khi có 2 transaction cùng thực hiện vào 1 bảng, transaction 1 cập nhật bản ghi đó nhưng chưa commit, transaction 2 lại đọc bản ghi đó nhưng lại trả về dữ liệu mà transaction 1 cập nhật mặc dùng chưa commit. Điều này vi phạm nguyên tắc nhất quán trong dữ liệu. Nếu transaction 1 lỗi mà lại rollback lại thì sẽ xảy ra vấn đề sai dữ liệu.
+- Hiệu suất rất nhanh.
+![Alt text](./images/DB_RU.png)
+
+2. Read commited (RC).
+- Khi transaction 2 thực hiện việc đọc bản ghi đó thì phải chờ đợi transaction 1 update và commit thành công thì mới được lấy dữ liệu mới, không thì vẫn lấy ra dữ liệu cũ lúc chưa được update.
+- Hiệu xuất chậm hơn vì phải chờ các transaction khác commit
+![Alt text](./images/DB_RC.png)
+
+3. Repeatble Read (PR).
+- Đọc lại dữ liệu, ngược lại với read commited, kể cả transaction 1 commit nhưng transaction 2 đang đọc mà chưa commit/rollback để kết thức phiên thì vẫn lấy dữ liệu cũ.
+
+![Alt text](./images/DB_PR.png)
+
+4. Serializable.
+- Mức cao nhất của database, tuần tụ hóa, các transaction trên cùng 1 table phải hoạt động tuần tự, thằng nào lấy khóa trước sẽ thực hiện trước, thằng nào lấy sau thì phải chờ.
+- Hiệu suất giảm mạnh, do chỉ sử lý 1 luồng thực thi trên 1 table, nhưng lại giải quyết được các vấn đề đọc ảo dữ liệu.
+- Như ta thấy transaction 2 xoay đợi đến khi nào transaction 1 commit thì mới hoạt động được.
+![Alt text](./images/DB_Serializable.png)
+
+- Nhiều dự án bỏ cơ chế Serializable nên tắt đi để tăng hiệu xuất
+- Mặc định của MySQL là Repeatble
+```SQL
+SHOW VARIABLES LIKE '%isolation%'
+```
