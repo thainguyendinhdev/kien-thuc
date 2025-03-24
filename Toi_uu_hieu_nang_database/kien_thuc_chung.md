@@ -28,4 +28,18 @@ Khi ta update ở bảng orders thì nó sẽ quét cả bảng customers để 
 
 => `Cần phải đánh index ở FOREIGN KEY để việc update sẽ nhanh hơn. Lưu ý đối với MySql thì khi FOREIGN KEY thì nó sẽ tự đánh index ở cột đó nếu chúng ta chưa tạo, nếu đánh rồi thì nó sẽ dùng index đó. Đối với SQL server thì việc đó lại không, chúng ta cần phải đánh thủ công`
 
-    
+### Tìm kiếm trong SQL dùng LIKE
+- Đối với việc tìm kiếm 1 giá trị trong bảng có 1tr bản ghi mà dùng `LIKE` thì sẽ rất chậm
+VD: 
+``` sql
+SELECT * FROM products where name LIKE '%abc%'; -- tìm rất lâu và sẽ không dùng index kể cả ta có đánh index trên cột name.
+SELECT * FROM products where name LIKE 'abc%'; -- tìm tốt hơn và có dùng index.
+```
+- Ta còn 1 cách tối ưu hơn:
+``` SQL
+SELECT * from products WHERE match(name) against ('abc') ---chỉ cần có abc là đáp ứng
+SELECT * from products WHERE match(name) against ('abc def') ---cái nào có 1 trong 2 ký tự đó đều đc lấy ra
+SELECT * from products WHERE match(name) against ('+abc +def') ---cần tìm đúng để có cả 2 ký tự mới lấy ra
+```
+- Việc dùng như này sẽ tốt hơn like đối với dữ liệu lớn nhưng ko thể so với việc dùng elasticsearch.
+- Nhược điểm tìm không chính xác với bài toán nếu mà bắt tìm kiếm kiểu 'toanbn' mà muốn chỉ gõ oan cũng phải ra thì chả có cách nào ngoài LIKE cả.
