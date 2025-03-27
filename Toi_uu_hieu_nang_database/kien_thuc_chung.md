@@ -17,6 +17,8 @@
         - 3 Gửi và xác nhận SQL
         - 4 Ngắt kết nối.
     - Nếu có hàng nghìn request cùng gửi đến thì các bước dùng chung sẽ phải lặp lại đó là bước 1, 2, 4 => Vậy cái nào dùng chung được ta sẽ tạo cái dùng chung đó là connect pool.
+- Khi truy vấn ko được sử dụng select * hoặc select hết tất cả các cột trong bảng vì dù chúng ta có đánh index cho điều kiện where đi nữa nó cũng quét toàn bộ. Vậy muốn lấy hết thông tin bảng đó mà vẫn tối ưu ta có thể dùng bảng tạm để lưu chữ như hình sau
+![alt text](./images/kotruyvanall.png)
 
 ---
 ### FOREIGN KEY
