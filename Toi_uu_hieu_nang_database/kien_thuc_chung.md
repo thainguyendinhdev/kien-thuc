@@ -45,3 +45,13 @@ SELECT * from products WHERE match(name) against ('+abc +def') ---cần tìm đ�
 ```
 - Việc dùng như này sẽ tốt hơn like đối với dữ liệu lớn nhưng ko thể so với việc dùng elasticsearch.
 - Nhược điểm tìm không chính xác với bài toán nếu mà bắt tìm kiếm kiểu 'toanbn' mà muốn chỉ gõ oan cũng phải ra thì chả có cách nào ngoài LIKE cả.
+
+### Các loại index
+- all: chỉ mục ko dùng
+- system: chỉ có 1 phần dữ liệu được truy vấn
+- const: cho biêt truy vấn SQL index được áp dụng trong truy vấn hiện tại
+- range: truy vấn hiện tại tìm kiếm trong khoảng thời gian
+- ref: cho biết truy vấn hiện tại đang được thực hiện
+- index: chỉ mục đang được thực hiện
+=> đánh in dẽ theo công thức bên trái, cái nào cao hơn thì đánh ngoài cùng, cái nào có khác cao hơn thì chọn làm index bên trái.
+![alt text](./images/index.png)
