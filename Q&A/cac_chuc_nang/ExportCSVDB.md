@@ -5,6 +5,7 @@
 - Như chúng ta thấy ofset càng cao thì thời gian truy vấn càng lâu. Vì nó vẫn phải quét tất cả để đến chỗ ofset.
 - Ta có thể dùng index của cột id để tìm nhanh hơn như sau
 ![alt text](./image/ExportCSV3.png)
+![alt text](./image/ExportCSV4.png)
 - Vậy là với việc ta tăng dần tìm id lên việc quét dữ liệu sẽ nhanh hơn rất nhiều
 - Nhược điểm id bắt buộc phải primary auto increment. Nếu không ta có thể lợi dụng cột created_at.
 - Với bài toán ID không tăng và cần order by thì ta có thể lợi dụng created_at hoặc tạo thêm cột sortable_id :
